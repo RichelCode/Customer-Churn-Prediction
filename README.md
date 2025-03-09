@@ -1,17 +1,19 @@
-# Customer Churn Prediction - Telecom Dataset
+# **Customer Churn Prediction - Telecom Dataset**  
 
-## Project Overview
-This project aims to analyze customer data from a telecommunications company to predict customer churn — the likelihood that a customer will discontinue their service. By understanding which factors contribute to churn, the company can develop targeted strategies to improve customer retention and customer satisfaction.
-
-## Dataset Source
-- **Name:** Telco Customer Churn Dataset
-- **Source:** [Kaggle - Telco Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
-- **Number of Records:** 7,043 customers
-- **Number of Features:** 21 columns including demographic, service, and account information.
+## **Project Overview**  
+This project analyzes customer data from a telecommunications company to predict **customer churn**—the likelihood that a customer will discontinue their service. By identifying key churn indicators, the company can **develop targeted strategies to improve customer retention and enhance customer satisfaction.**  
 
 ---
 
-## Data Dictionary
+## **Dataset Source**  
+- **Name:** Telco Customer Churn Dataset  
+- **Source:** [Kaggle - Telco Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)  
+- **Number of Records:** 7,043 customers  
+- **Number of Features:** 21 columns, including **demographic, service, and account information**  
+
+---
+
+## **Data Dictionary**  
 | Column Name           | Description                                                                 | Data Type      |
 |----------------------|-----------------------------------------------------------------------------|------------------|
 | **customerID**        | Unique identifier for each customer                                        | String          |
@@ -38,26 +40,88 @@ This project aims to analyze customer data from a telecommunications company to 
 
 ---
 
-## Project Objectives
-- Perform **Exploratory Data Analysis (EDA)** to understand customer behavior and churn drivers.
-- Engineer relevant features where necessary.
-- Build and evaluate **classification models** to predict customer churn.
-- Provide **business recommendations** to reduce churn and improve customer retention.
+## **Project Objectives**
+- Perform **Exploratory Data Analysis (EDA)** to understand customer behavior and churn drivers.  
+- Engineer relevant features to enhance model performance.  
+- Build and evaluate multiple **classification models** to predict customer churn.  
+- Compare model performance across various feature sets.  
+- Provide **business recommendations** to reduce churn and improve retention strategies.  
 
 ---
 
-## Tools & Technologies
-- Python
-- Libraries: Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn
+## **Tools & Technologies**
+- **Programming Language:** Python  
+- **Libraries Used:**  
+  - Data Manipulation: Pandas, NumPy  
+  - Visualization: Matplotlib, Seaborn  
+  - Machine Learning: Scikit-learn, Imbalanced-learn  
 
 ---
 
-## Project Workflow
-1. **Data Understanding** (including reviewing this Data Dictionary)
-2. **Data Cleaning & Preprocessing** (handling missing values, encoding categorical variables, etc.)
-3. **Exploratory Data Analysis (EDA)** (visualizations & insights)
-4. **Modeling** (training classification models such as Logistic Regression, Decision Trees, Random Forest, etc.)
-5. **Evaluation & Interpretation** (measuring accuracy, precision, recall, F1-score, etc.)
-6. **Business Recommendations** (how the company can improve retention based on data insights)
+## **Feature Engineering**
+To improve model performance, **feature transformations** were applied:
+1. **One-Hot Encoding**: Categorical variables like `Contract`, `PaymentMethod`, and `InternetService` were converted into multiple binary columns.  
+2. **Binning**:  
+   - **Tenure** was grouped into **three categories**: `0-6 months`, `6-12 months`, and `12+ months`.  
+   - **New features** were created for better interpretability:
+     - `LongTermContract`: Customers with **one-year or two-year contracts**.  
+     - `ManualPay`: Customers paying via **manual methods** (e.g., mailed or electronic check).  
+     - `Has_Internet`: Customers with **internet service**.  
+     - `TotalStreamingServices`: Count of streaming services subscribed to.  
+     - `TotalSecurityServices`: Count of security/support services subscribed to.  
+3. **Log Transformations**: Applied to **right-skewed numerical features** like `MonthlyCharges` to normalize distributions.  
 
 ---
+
+## **Modeling & Evaluation**
+The following **four classification models** were tested using various feature sets:
+
+| Model                 | Best Feature Set        | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
+|----------------------|-----------------------|---------|-----------|--------|----------|---------|
+| **Logistic Regression** | One-Hot Encoded Features | 0.737   | 0.503     | 0.805  | 0.619    | 0.835   |
+| **KNN**               | Log + Binned Features  | 0.705   | 0.464     | 0.722  | 0.565    | 0.776   |
+| **Decision Tree**     | Fully Engineered Features | 0.727   | 0.490     | 0.754  | 0.594    | 0.802   |
+| **Random Forest**     | Fully Engineered Features | 0.751   | 0.518     | 0.792  | 0.630    | 0.845   |
+
+**Final Model Selection:** **Random Forest with Fully Engineered Features**  
+- **Best overall performance** (Highest ROC-AUC: **0.845**)  
+- **Balances recall (0.792) and precision (0.518)**  
+- **Leverages multiple feature transformations for improved accuracy**  
+
+---
+
+## **Business Insights & Recommendations**
+The churn analysis revealed key business insights:
+
+### **1Tenure Significantly Affects Churn**
+- **Short tenure (<6 months) customers churn the most.**
+- **Recommendation:** Implement **onboarding incentives and personalized customer engagement** for new customers.  
+
+### **Contract Type Influences Loyalty**
+- **Month-to-month contracts** have the **highest churn rates**.  
+**Recommendation:** Encourage **long-term contracts** by offering **discounts & loyalty perks**.  
+
+### **Internet & Streaming Services Impact Retention**
+- **Fiber optic customers churn more frequently** (likely due to pricing).  
+- Customers **bundling security/streaming services are more likely to stay.**  
+**Recommendation:** Offer **discounted bundle packages** for **streaming & security services**.  
+
+### **Payment Method Correlates with Churn**
+- **Customers paying via electronic check churn more** than those using auto-pay methods.  
+**Recommendation:** **Incentivize automatic payments** with small discounts or bonus perks.  
+
+### **High Monthly Charges Increase Churn Risk**
+- **Customers with higher bills are more likely to leave.**
+- **Recommendation:** Offer **tiered pricing models** with **customized payment plans** to retain price-sensitive customers.  
+
+---
+
+## **Final Conclusion**
+This **churn prediction model** helps the business proactively identify customers **at high risk of leaving**.  
+By implementing **targeted retention strategies**, the company can:  
+Reduce customer churn  
+Improve customer satisfaction  
+Maximize long-term revenue growth  
+
+This project **combines machine learning with actionable business recommendations**, demonstrating how **data-driven insights can drive retention strategies in telecom industries.** 
+
