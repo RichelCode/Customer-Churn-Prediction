@@ -93,7 +93,7 @@ The following **four classification models** were tested using various feature s
 ## **Business Insights & Recommendations**
 The churn analysis revealed key business insights:
 
-### **1Tenure Significantly Affects Churn**
+### **Tenure Significantly Affects Churn**
 - **Short tenure (<6 months) customers churn the most.**
 - **Recommendation:** Implement **onboarding incentives and personalized customer engagement** for new customers.  
 
